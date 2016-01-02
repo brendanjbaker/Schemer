@@ -2,7 +2,7 @@
 
 set -e
 
-./usage 2 "dbvm version database-write <database-configuration-path> <version>" "$@"
+./usage 2 "dbvm version write-database <database-configuration-path> <version>" "$@"
 
 database_configuration_path=$1
 version=$2
