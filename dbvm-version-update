@@ -1,0 +1,40 @@
+#!/bin/bash
+
+set -e
+
+./usage 2 "usage: dbvm version update <database-configuration-path> <source-path>" "$@"
+
+database_configuration_path=$1
+source_path=$2
+
+source apply-configuration $database_configuration_path
+
+database_version=$(./dbvm-version-read-database $database_configuration_path)
+source_version=$(./dbvm-version-read-source $source_path)
+
+echo "Database version: $database_version"
+echo "Source version: $source_version"
+echo
+
+if [ $database_version -eq $source_version ]; then
+	echo "Already up-to-date."
+	echo
+	exit 0
+fi
+
+if [ $database_version -gt $source_version ]; then
+	./error "dbvm: Database is ahead of source; cannot update."
+fi
+
+from=$(($database_version+1))
+to=$source_version
+
+for i in $(seq $from $to); do
+	echo "Applying update #$i ($(readlink -f $source_path/$i*.sql))..."
+	cat $source_path/$i*.sql | ./dbvm-query $database_configuration_path
+	./dbvm-version-write-database $database_configuration_path $i
+done
+
+echo
+echo "Up-to-date."
+echo

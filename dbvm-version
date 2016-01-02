@@ -8,6 +8,7 @@ usage() {
 	echo "Supported commands are:"
 	echo "read-database    Read version of database"
 	echo "read-source      Read version of source"
+	echo "update           Update database version to source version"
 	echo "write-database   Write version of database"
 	echo
 }
@@ -26,6 +27,10 @@ case $command in
 
 	read-source)
 		./dbvm-version-read-source "${@:2}"
+		;;
+
+	update)
+		./dbvm-version-update "${@:2}"
 		;;
 
 	write-database)
