@@ -2,11 +2,11 @@
 
 set -e
 
-./usage 2 "dbvm manager uninstall <database-configuration-path>" "$@"
+./usage 1 "dbvm manager uninstall <database-configuration-path>" "$@"
 
 database_configuration_path=$1
 
-source apply-versioning $database_configuration_path
+source apply-configuration $database_configuration_path
 
 ./dbvm-query $database_configuration_path << EOF
 DROP TABLE "$versioning_schema"."database_version";
