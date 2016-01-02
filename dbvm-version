@@ -20,11 +20,11 @@ command=$1
 
 case $command in
 	database-read)
-		./dbvm-version-read "${@:2}"
+		./dbvm-version-database-read "${@:2}"
 		;;
 
 	database-write)
-		./dbvm-version-write "${@:2}"
+		./dbvm-version-database-write "${@:2}"
 		;;
 
 	*)
