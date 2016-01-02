@@ -6,8 +6,8 @@ usage() {
 	echo "usage: dbvm version <command> [<arguments>]"
 	echo
 	echo "Supported commands are:"
-	echo "read    Read version of database"
-	echo "write   Write version of database"
+	echo "database-read    Read version of database"
+	echo "database-write   Write version of database"
 	echo
 }
 
@@ -19,11 +19,11 @@ fi
 command=$1
 
 case $command in
-	read)
+	database-read)
 		./dbvm-version-read "${@:2}"
 		;;
 
-	write)
+	database-write)
 		./dbvm-version-write "${@:2}"
 		;;
 
