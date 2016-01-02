@@ -2,15 +2,12 @@
 
 set -e
 
-./usage 2 "dbvm manager uninstall <database-configuration-path> <schema>" "$@"
+./usage 2 "dbvm manager uninstall <database-configuration-path>" "$@"
 
 database_configuration_path=$1
-schema=$2
 
-if [ ! -f $database_configuration_path ]; then
-	./error "dbvm: Database configuration '$database_configuration_path' not found."
-fi
+source apply-versioning $database_configuration_path
 
 ./dbvm-query $database_configuration_path << EOF
-DROP TABLE "$schema"."database_version";
+DROP TABLE "$versioning_schema"."database_version";
 EOF

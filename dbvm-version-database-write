@@ -2,12 +2,13 @@
 
 set -e
 
-./usage 3 "dbvm version database-write <database-configuration-path> <schema> <version>" "$@"
+./usage 2 "dbvm version database-write <database-configuration-path> <version>" "$@"
 
 database_configuration_path=$1
-schema=$2
-version=$3
+version=$2
+
+source apply-configuration $database_configuration_path
 
 ./dbvm-query $database_configuration_path 2> /dev/null << EOF
-INSERT INTO "$schema"."database_version" VALUES ($version, NOW());
+INSERT INTO "$versioning_schema"."database_version" VALUES ($version, NOW());
 EOF

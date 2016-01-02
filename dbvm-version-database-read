@@ -2,18 +2,12 @@
 
 set -e
 
-./usage 2 "dbvm version read-database <database-configuration-path> <schema>" "$@"
+./usage 1 "dbvm version read-database <database-configuration-path>" "$@"
 
 database_configuration_path=$1
-schema=$2
 
-if [ ! -f $database_configuration_path ]; then
-	./error "dbvm: Database configuration '$database_configuration_path' not found."
-fi
+source apply-configuration $database_configuration_path
 
-version=$(./dbvm-query $database_configuration_path 2> /dev/null << EOF
-SELECT MAX("id") FROM "$schema"."database_version";
+./dbvm-query $database_configuration_path 2> /dev/null << EOF
+SELECT MAX("id") FROM "$versioning_schema"."database_version";
 EOF
-)
-
-echo $version
