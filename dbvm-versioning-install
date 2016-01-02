@@ -2,7 +2,7 @@
 
 set -e
 
-./usage 2 "dbvm versioning install <database-configuration-path> <schema>" "$@"
+./usage 2 "dbvm manager install <database-configuration-path> <schema>" "$@"
 
 database_configuration_path=$1
 schema=$2

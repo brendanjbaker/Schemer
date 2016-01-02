@@ -6,8 +6,8 @@ usage() {
 	echo "usage: dbvm [--version] <command> [<arguments>]"
 	echo
 	echo "Supported commands are:"
-	echo "version      Manage versions"
-	echo "versioning   Manage versioning"
+	echo "manager   Manage management"
+	echo "version   Manage versions"
 	echo
 }
 
@@ -20,12 +20,12 @@ command=$1
 cd $(dirname $(readlink -f $0))
 
 case $command in
-	version)
-		./dbvm-version "${@:2}"
+	manager)
+		./dbvm-manager "${@:2}"
 		;;
 
-	versioning)
-		./dbvm-versioning "${@:2}"
+	version)
+		./dbvm-version "${@:2}"
 		;;
 
 	--version)
