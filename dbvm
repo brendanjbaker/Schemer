@@ -6,8 +6,10 @@ usage() {
 	echo "usage: dbvm [--version] <command> [<arguments>]"
 	echo
 	echo "Supported commands are:"
-	echo "manager   Manage management"
-	echo "version   Manage versions"
+	echo "install     Install dbvm to /usr/local/bin"
+	echo "manager     Manage management"
+	echo "uninstall   Uninstall dbvm from /usr/local/bin"
+	echo "version     Manage versions"
 	echo
 }
 
@@ -20,8 +22,16 @@ command=$1
 cd $(dirname $(readlink -f $0))
 
 case $command in
+	install)
+		./dbvm-install "${@:2}"
+		;;
+
 	manager)
 		./dbvm-manager "${@:2}"
+		;;
+
+	uninstall)
+		./dbvm-uninstall "${@:2}"
 		;;
 
 	version)

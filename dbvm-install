@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -e
+
+script_path=$(readlink -f ./dbvm)
+bin_path=/usr/local/bin/dbvm
+
+if [ -h $bin_path ]; then
+	./warn "dbvm: Already installed"
+else
+	sudo ln -s $script_path $bin_path
+fi
