@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -e
+
+./usage 2 "dbvm versioning is-installed <database-configuration-path> <schema>" "$@"
+
+database_configuration_path=$1
+schema=$2
+
+if [ ! -f $database_configuration_path ]; then
+	./error "dbvm: Database configuration '$database_configuration_path' not found."
+fi
+
+./dbvm-query $database_configuration_path &> /dev/null << EOF
+SELECT "id" FROM "$schema"."database_version";
+EOF

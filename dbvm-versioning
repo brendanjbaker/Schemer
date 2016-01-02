@@ -6,8 +6,9 @@ usage() {
 	echo "usage: dbvm versioning <command> [<arguments>]"
 	echo
 	echo "Supported commands are:"
-	echo "install     Install versioning on database"
-	echo "uninstall   Uninstall versioning on database"
+	echo "install        Install versioning on database"
+	echo "is-installed   Determine whether versioning is installed on database."
+	echo "uninstall      Uninstall versioning on database"
 	echo
 }
 
@@ -21,6 +22,10 @@ command=$1
 case $command in
 	install)
 		./dbvm-versioning-install "${@:2}"
+		;;
+
+	is-installed)
+		./dbvm-versioning-is-installed "${@:2}"
 		;;
 
 	uninstall)
