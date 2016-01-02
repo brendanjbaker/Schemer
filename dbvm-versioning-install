@@ -20,4 +20,6 @@ CREATE TABLE "$schema"."database_version"
 
 ALTER TABLE "$schema"."database_version"
 	ADD PRIMARY KEY ("id");
+
+INSERT INTO "$schema"."database_version" VALUES (0, NOW());
 EOF
