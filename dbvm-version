@@ -6,8 +6,8 @@ usage() {
 	echo "usage: dbvm version <command> [<arguments>]"
 	echo
 	echo "Supported commands are:"
-	echo "read           Read version of database"
-	echo "write          Write version of database"
+	echo "read    Read version of database"
+	echo "write   Write version of database"
 	echo
 }
 
