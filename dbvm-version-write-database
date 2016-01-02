@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -e
+
+./usage 2 "dbvm version write-database <database-configuration-path> <version>" "$@"
+
+database_configuration_path=$1
+version=$2
+
+source apply-configuration $database_configuration_path
+
+./dbvm-query $database_configuration_path 2> /dev/null << EOF
+INSERT INTO "$versioning_schema"."database_version" VALUES ($version, NOW());
+EOF

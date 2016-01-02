@@ -1,0 +1,40 @@
+#!/bin/bash
+
+set -e
+
+usage() {
+	echo "usage: dbvm manager <command> [<arguments>]"
+	echo
+	echo "Supported commands are:"
+	echo "install        Install manager on database"
+	echo "is-installed   Determine whether manager is installed on database"
+	echo "uninstall      Uninstall manager from database"
+	echo
+}
+
+if [ $# -lt 1 ]; then
+	usage >&2
+	exit 1
+fi
+
+command=$1
+
+case $command in
+	install)
+		./dbvm-manager-install "${@:2}"
+		;;
+
+	is-installed)
+		./dbvm-manager-is-installed "${@:2}"
+		;;
+
+	uninstall)
+		./dbvm-manager-uninstall "${@:2}"
+		;;
+
+	*)
+		echo "dbvm: '$command' is not a recognized command." >&2
+		echo >&2
+		usage >&2
+		exit 1
+esac

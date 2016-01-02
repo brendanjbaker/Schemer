@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set -e
+
+./usage 1 "dbvm manager install <database-configuration-path>" "$@"
+
+database_configuration_path=$1
+
+source apply-configuration $database_configuration_path
+
+./dbvm-query $database_configuration_path << EOF
+CREATE TABLE "$versioning_schema"."database_version"
+(
+	"id" INTEGER NOT NULL,
+	"created" TIMESTAMP NOT NULL
+);
+
+ALTER TABLE "$versioning_schema"."database_version"
+	ADD PRIMARY KEY ("id");
+
+INSERT INTO "$versioning_schema"."database_version" VALUES (0, NOW());
+EOF

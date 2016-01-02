@@ -1,0 +1,51 @@
+#!/bin/bash
+
+set -e
+
+usage() {
+	echo "usage: dbvm [--version] <command> [<arguments>]"
+	echo
+	echo "Supported commands are:"
+	echo "install     Install dbvm to /usr/local/bin"
+	echo "manager     Manage management"
+	echo "uninstall   Uninstall dbvm from /usr/local/bin"
+	echo "version     Manage versions"
+	echo
+}
+
+if [ $# -lt 1 ]; then
+	usage >&2
+	exit 1
+fi
+
+command=$1
+cd $(dirname $(readlink -f $0))
+
+case $command in
+	install)
+		./dbvm-install "${@:2}"
+		;;
+
+	manager)
+		./dbvm-manager "${@:2}"
+		;;
+
+	uninstall)
+		./dbvm-uninstall "${@:2}"
+		;;
+
+	version)
+		./dbvm-version "${@:2}"
+		;;
+
+	--version)
+		echo "dbvm version 0.1.0"
+		exit 0
+		;;
+
+	*)
+		echo "dbvm: '$command' is not a recognized command." >&2
+		echo >&2
+		usage >&2
+		exit 1
+esac

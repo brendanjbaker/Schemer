@@ -1,0 +1,45 @@
+#!/bin/bash
+
+set -e
+
+usage() {
+	echo "usage: dbvm version <command> [<arguments>]"
+	echo
+	echo "Supported commands are:"
+	echo "read-database    Read version of database"
+	echo "read-source      Read version of source"
+	echo "update           Update database version to source version"
+	echo "write-database   Write version of database"
+	echo
+}
+
+if [ $# -lt 1 ]; then
+	usage >&2
+	exit 1
+fi
+
+command=$1
+
+case $command in
+	read-database)
+		./dbvm-version-read-database "${@:2}"
+		;;
+
+	read-source)
+		./dbvm-version-read-source "${@:2}"
+		;;
+
+	update)
+		./dbvm-version-update "${@:2}"
+		;;
+
+	write-database)
+		./dbvm-version-write-database "${@:2}"
+		;;
+
+	*)
+		echo "dbvm: '$command' is not a recognized command." >&2
+		echo >&2
+		usage >&2
+		exit 1
+esac

@@ -1,0 +1,24 @@
+#!/bin/bash
+
+set -e
+
+print_usage() {
+	if [ $# -eq 0 ]; then
+		print_usage "usage <argument-count> <usage-help> <arguments>"
+	else
+		echo "$1" 1>&2
+		echo 1>&2
+	fi
+}
+
+if [ $# -lt 2 ]; then
+	print_usage
+	exit 1
+fi
+
+expected_argument_count=$(($1+2))
+
+if [ $# -lt $expected_argument_count ]; then
+	print_usage "$2"
+	exit 1
+fi
