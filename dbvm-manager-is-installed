@@ -2,7 +2,7 @@
 
 set -e
 
-./usage 2 "dbvm manager is-installed <database-configuration-path>" "$@"
+./usage 1 "dbvm manager is-installed <database-configuration-path>" "$@"
 
 database_configuration_path=$1
 
