@@ -1,0 +1,38 @@
+#!/bin/bash
+
+set -e
+
+./usage 1 "query <configuration-path>" "$@"
+
+configuration_path=$1
+
+if [ ! -f $configuration_path ]; then
+	./error "dbvm: Configuration '$configuration_path' not found."
+fi
+
+if [ ! -f ~/.pgpass ]; then
+	./error "dbvm: ~/.pgpass not found."
+fi
+
+source $configuration_path
+
+if [ -z "$host" ]; then
+	./error "dbvm: \"host\" variable not defined in configuration. $host"
+fi
+
+if [ -z "$dbname" ]; then
+	./error "dbvm: \"dbname\" variable not defined in configuration."
+fi
+
+if [ -z "$username" ]; then
+	./error "dbvm: \"username\" variable not defined in configuration."
+fi
+
+psql \
+	--dbname=$dbname \
+	--host $host \
+	--pset "format=unaligned" \
+	--pset "tuples_only=on" \
+	--quiet \
+	--set "on_error_stop=on" \
+	--username $username
