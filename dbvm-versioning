@@ -8,7 +8,6 @@ usage() {
 	echo "Supported commands are:"
 	echo "install        Install versioning on database"
 	echo "is-installed   Determine whether versioning is installed on database."
-	echo "read           Read version of database"
 	echo "uninstall      Uninstall versioning on database"
 	echo
 }
@@ -27,10 +26,6 @@ case $command in
 
 	is-installed)
 		./dbvm-versioning-is-installed "${@:2}"
-		;;
-
-	read)
-		./dbvm-versioning-read "${@:2}"
 		;;
 
 	uninstall)
