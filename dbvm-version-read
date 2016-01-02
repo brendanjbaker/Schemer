@@ -12,7 +12,7 @@ if [ ! -f $database_configuration_path ]; then
 fi
 
 version=$(./dbvm-query $database_configuration_path 2> /dev/null << EOF
-SELECT "id" FROM "$schema"."database_version";
+SELECT MAX("id") FROM "$schema"."database_version";
 EOF
 )
 
