@@ -23,6 +23,8 @@ fi
 command=$1
 cd $(dirname $(readlink -f $0))
 
+version=$(cat version)
+
 case $command in
 	backup)
 		./schemer-backup "${@:2}"
@@ -49,7 +51,7 @@ case $command in
 		;;
 
 	--version)
-		echo "schemer version 0.1.0"
+		echo "schemer version $version"
 		exit 0
 		;;
 
