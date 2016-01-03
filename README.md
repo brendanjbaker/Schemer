@@ -1,8 +1,8 @@
-# Database Version Manager (DBVM)
+# Schemer
 
 ## About
 
-Database Version Manager (dbvm) helps manage database schema versioning. Database versions are represented by sequential integers. Versioning information is stored in a special versioning schema. Source versions are determined by filenames:
+Schemer helps manage database schema versioning. Database versions are represented by sequential integers. Versioning information is stored in a special versioning schema. Source versions are determined by filenames:
 
 ```
 1.sql                        # Update 1
@@ -10,27 +10,27 @@ Database Version Manager (dbvm) helps manage database schema versioning. Databas
 3_.sql                       # Update 3
 ```
 
-dbvm currently only supports Postgres. Support for other database systems is possible (pull requests welcomed).
+Schemer currently only supports Postgres. Support for other database systems is possible (pull requests welcomed).
 
-## Installing dbvm
+## Installing Schemer
 
-To install dbvm onto your path, run:
+To install `schemer` onto your path, run:
 
 ```
-git clone git@github.com:brendanjbaker/dbvm.git
-cd dbvm
-./dbvm install
+git clone git@github.com:brendanjbaker/Schemer.git schemer
+cd schemer
+./schemer install
 ```
 
 To remove it from your path:
 
 ```
-dbvm uninstall
+schemer uninstall
 ```
 
-## Configuring dbvm
+## Configuring Schemer
 
-Most dbvm commands take a configuration file parameter. This configuration path alleviates having to specify the database server, username, versioning schema name, etc., in every operation. You may place a dbvm configuration file anywhere. Its format is:
+Most `schemer` commands take a configuration file parameter. This configuration path alleviates having to specify the database server, username, versioning schema name, etc., in every operation. You may place a Schemer configuration file anywhere. Its format is:
 
 ```
 host=127.0.0.1
@@ -39,11 +39,11 @@ username=john
 versioning_schema=widget_versioning
 ```
 
-DBVM does not handle passwords directly. If you are using password or MD5 authentication, please ensure your [~/.pgpass](http://www.postgresql.org/docs/current/static/libpq-pgpass.html) file is up-to-date.
+Schemer does not handle passwords directly. If you are using password or MD5 authentication, please ensure your [~/.pgpass](http://www.postgresql.org/docs/current/static/libpq-pgpass.html) file is up-to-date.
 
 ## Adding versioning to your project
 
-To begin using dbvm on your database, make certain that the schema specified in your database configuration file exists:
+To begin using Schemer on your database, make certain that the schema specified in your database configuration file exists:
 
 ```
 psql --command="CREATE SCHEMA widget_versioning AUTHORIZATION john;"
@@ -52,24 +52,24 @@ psql --command="CREATE SCHEMA widget_versioning AUTHORIZATION john;"
 Then run:
 
 ```
-dbvm manager install ~/my-database-configuration-file
+schemer manager install ~/my-database-configuration-file
 ```
 
 To remove it, run:
 
 ```
-dbvm manager uninstall ~/my-database-configuration-file
+schemer manager uninstall ~/my-database-configuration-file
 ```
 
 ## Applying updates
 
-To update your database schema version to your source schema version, use `dbvm version update`:
+To update your database schema version to your source schema version, use `schemer version update`:
 
 ```
-dbvm version update ~/my-database-configuration-file ~/code/widget-project/database/versions/
+schemer version update ~/my-database-configuration-file ~/code/widget-project/database/versions/
 ```
 
-dbvm will identify the database and source versions it detected, then apply each update necessary:
+Schemer will identify the database and source versions it detected, then apply each update necessary:
 
 ```
 Database version: 0
@@ -82,19 +82,19 @@ Applying update #3 (/d/code/db-test/3_test3-gamma.sql)...
 Up-to-date.
 ```
 
-If an error is encountered during any update, dbvm exits immediately. Remediate the problem, then issue the update command again to complete the operation.
+If an error is encountered during any update, `schemer` exits immediately. Remediate the problem, then issue the update command again to complete the operation.
 
 ## Help
 
-Typing `dbvm` or `dbvm <subcommand>` outputs usage and supported commands:
+Typing `schemer` or `schemer <subcommand>` outputs usage and supported commands:
 
 ```
-usage: dbvm [--version] <command> [<arguments>]
+usage: schemer [--version] <command> [<arguments>]
 
 Supported commands are:
-install     Install dbvm to /usr/local/bin
+install     Install schemer to /usr/local/bin
 manager     Manage management
-uninstall   Uninstall dbvm from /usr/local/bin
+uninstall   Uninstall schemer from /usr/local/bin
 version     Manage versions
 ```
 

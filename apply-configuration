@@ -7,23 +7,23 @@ set -e
 configuration_path=$1
 
 if [ ! -f $configuration_path ]; then
-	./error "dbvm: Configuration '$configuration_path' not found."
+	./error "schemer: Configuration '$configuration_path' not found."
 fi
 
 source $configuration_path
 
 if [ -z "$host" ]; then
-	./error "dbvm: \"host\" variable not defined in configuration. $host"
+	./error "schemer: \"host\" variable not defined in configuration. $host"
 fi
 
 if [ -z "$dbname" ]; then
-	./error "dbvm: \"dbname\" variable not defined in configuration."
+	./error "schemer: \"dbname\" variable not defined in configuration."
 fi
 
 if [ -z "$username" ]; then
-	./error "dbvm: \"username\" variable not defined in configuration."
+	./error "schemer: \"username\" variable not defined in configuration."
 fi
 
 if [ -z "$versioning_schema" ]; then
-	./error "dbvm: \"versioning_schema\" variable not defined in configuration."
+	./error "schemer: \"versioning_schema\" variable not defined in configuration."
 fi

@@ -3,14 +3,14 @@
 set -e
 
 usage() {
-	echo "usage: dbvm [--version] <command> [<arguments>]"
+	echo "usage: schemer [--version] <command> [<arguments>]"
 	echo
 	echo "Supported commands are:"
 	echo "backup      Manage backups"
-	echo "install     Install dbvm to /usr/local/bin"
+	echo "install     Install schemer to /usr/local/bin"
 	echo "manager     Manage management"
 	echo "schema      Manage schemas"
-	echo "uninstall   Uninstall dbvm from /usr/local/bin"
+	echo "uninstall   Uninstall schemer from /usr/local/bin"
 	echo "version     Manage versions"
 	echo
 }
@@ -25,36 +25,36 @@ cd $(dirname $(readlink -f $0))
 
 case $command in
 	backup)
-		./dbvm-backup "${@:2}"
+		./schemer-backup "${@:2}"
 		;;
 
 	install)
-		./dbvm-install "${@:2}"
+		./schemer-install "${@:2}"
 		;;
 
 	manager)
-		./dbvm-manager "${@:2}"
+		./schemer-manager "${@:2}"
 		;;
 
 	schema)
-		./dbvm-schema "${@:2}"
+		./schemer-schema "${@:2}"
 		;;
 
 	uninstall)
-		./dbvm-uninstall "${@:2}"
+		./schemer-uninstall "${@:2}"
 		;;
 
 	version)
-		./dbvm-version "${@:2}"
+		./schemer-version "${@:2}"
 		;;
 
 	--version)
-		echo "dbvm version 0.1.0"
+		echo "schemer version 0.1.0"
 		exit 0
 		;;
 
 	*)
-		echo "dbvm: '$command' is not a recognized command." >&2
+		echo "schemer: '$command' is not a recognized command." >&2
 		echo >&2
 		usage >&2
 		exit 1

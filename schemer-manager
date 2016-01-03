@@ -3,7 +3,7 @@
 set -e
 
 usage() {
-	echo "usage: dbvm manager <command> [<arguments>]"
+	echo "usage: schemer manager <command> [<arguments>]"
 	echo
 	echo "Supported commands are:"
 	echo "install        Install manager on database"
@@ -21,19 +21,19 @@ command=$1
 
 case $command in
 	install)
-		./dbvm-manager-install "${@:2}"
+		./schemer-manager-install "${@:2}"
 		;;
 
 	is-installed)
-		./dbvm-manager-is-installed "${@:2}"
+		./schemer-manager-is-installed "${@:2}"
 		;;
 
 	uninstall)
-		./dbvm-manager-uninstall "${@:2}"
+		./schemer-manager-uninstall "${@:2}"
 		;;
 
 	*)
-		echo "dbvm: '$command' is not a recognized command." >&2
+		echo "schemer: '$command' is not a recognized command." >&2
 		echo >&2
 		usage >&2
 		exit 1

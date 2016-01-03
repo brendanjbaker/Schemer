@@ -2,7 +2,7 @@
 
 set -e
 
-./usage 2 "dbvm backup create <database-configuration-path> <backup-path> [<database>]" "$@"
+./usage 2 "schemer backup create <database-configuration-path> <backup-path> [<database>]" "$@"
 
 database_configuration_path=$1
 backup_path=$2

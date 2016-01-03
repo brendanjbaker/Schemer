@@ -3,7 +3,7 @@
 set -e
 
 usage() {
-	echo "usage: dbvm backup <command> [<arguments>]"
+	echo "usage: schemer backup <command> [<arguments>]"
 	echo
 	echo "Supported commands are:"
 	echo "create    Create backup"
@@ -20,15 +20,15 @@ command=$1
 
 case $command in
 	create)
-		./dbvm-backup-create "${@:2}"
+		./schemer-backup-create "${@:2}"
 		;;
 
 	restore)
-		./dbvm-backup-restore "${@:2}"
+		./schemer-backup-restore "${@:2}"
 		;;
 
 	*)
-		echo "dbvm: '$command' is not a recognized command." >&2
+		echo "schemer: '$command' is not a recognized command." >&2
 		echo >&2
 		usage >&2
 		exit 1
