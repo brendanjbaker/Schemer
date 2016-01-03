@@ -2,7 +2,7 @@
 
 set -e
 
-./usage 3 "dbvm schema create <database-configuration-path> <schema-name> <schema-path>" "$@"
+./usage 3 "schemer schema create <database-configuration-path> <schema-name> <schema-path>" "$@"
 
 database_configuration_path=$1
 schema_name=$2
@@ -13,16 +13,16 @@ if [ ! -d $schema_path ]; then
 fi
 
 if [ ! -f $schema_path/.version ]; then
-	./error "dbvm: \".version\" file not present in \"$schema_path\"."
+	./error "schemer: \".version\" file not present in \"$schema_path\"."
 fi
 
-if ! ./dbvm manager is-installed $database_configuration_path; then
-	./dbvm manager install $database_configuration_path
+if ! ./schemer manager is-installed $database_configuration_path; then
+	./schemer manager install $database_configuration_path
 fi
 
 source apply-configuration $database_configuration_path
 
-./dbvm-query $database_configuration_path <<EOF
+./schemer-query $database_configuration_path <<EOF
 CREATE SCHEMA "$schema_name" AUTHORIZATION "$username";
 EOF
 
@@ -42,10 +42,10 @@ fi
 
 while read -r path; do
 	echo "Applying \"$path\"..."
-	./dbvm-query $database_configuration_path < $schema_path/$path
+	./schemer-query $database_configuration_path < $schema_path/$path
 done <<< "$order"
 
-./dbvm version write-database $database_configuration_path $version
+./schemer version write-database $database_configuration_path $version
 
 echo
 echo "Up-to-date."

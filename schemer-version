@@ -3,7 +3,7 @@
 set -e
 
 usage() {
-	echo "usage: dbvm version <command> [<arguments>]"
+	echo "usage: schemer version <command> [<arguments>]"
 	echo
 	echo "Supported commands are:"
 	echo "read-database    Read version of database"
@@ -22,23 +22,23 @@ command=$1
 
 case $command in
 	read-database)
-		./dbvm-version-read-database "${@:2}"
+		./schemer-version-read-database "${@:2}"
 		;;
 
 	read-source)
-		./dbvm-version-read-source "${@:2}"
+		./schemer-version-read-source "${@:2}"
 		;;
 
 	update)
-		./dbvm-version-update "${@:2}"
+		./schemer-version-update "${@:2}"
 		;;
 
 	write-database)
-		./dbvm-version-write-database "${@:2}"
+		./schemer-version-write-database "${@:2}"
 		;;
 
 	*)
-		echo "dbvm: '$command' is not a recognized command." >&2
+		echo "schemer: '$command' is not a recognized command." >&2
 		echo >&2
 		usage >&2
 		exit 1
