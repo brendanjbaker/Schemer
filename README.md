@@ -1,6 +1,18 @@
 # Database Version Manager (DBVM)
 Version 0.1.1
 
+## About
+
+Database Version Manager (dbvm) helps manage database schema versioning. Database versions are represented by sequential integers. Versioning information is stored in a special versioning schema. Source version information is determined by update filenames:
+
+```
+1.sql                        # Update 1
+2_optional-description.sql   # Update 2
+3_.sql                       # Update 3
+```
+
+dbvm currently supports recent Postgres versions. Support for other database systems is possible -- submit a pull request!
+
 ## Installing dbvm
 
 To install dbvm onto your path, run:
@@ -71,4 +83,18 @@ Up-to-date.
 ```
 
 If an error is encountered during any update, dbvm exits immediately. Remediate the problem, then issue the update command again to complete the operation.
+
+## Help
+
+Typing `dbvm` or `dbvm <subcommand>` outputs usage and supported commands:
+
+```
+usage: dbvm [--version] <command> [<arguments>]
+
+Supported commands are:
+install     Install dbvm to /usr/local/bin
+manager     Manage management
+uninstall   Uninstall dbvm from /usr/local/bin
+version     Manage versions
+```
 
