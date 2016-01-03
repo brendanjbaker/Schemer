@@ -2,7 +2,7 @@
 
 set -e
 
-./usage 2 "dbvm schema destroy <database-configuration-path> <schema-name> <backup-path>" "$@"
+./usage 2 "schemer schema destroy <database-configuration-path> <schema-name> <backup-path>" "$@"
 
 database_configuration_path=$1
 schema_name=$2
@@ -10,9 +10,9 @@ backup_path=$3
 
 source apply-configuration $database_configuration_path
 
-./dbvm backup create $database_configuration_path $backup_path
+./schemer backup create $database_configuration_path $backup_path
 
-./dbvm-query $database_configuration_path <<EOF
+./query $database_configuration_path <<EOF
 DELETE FROM "$versioning_schema"."database_version";
 DROP SCHEMA "$schema_name" CASCADE;
 EOF

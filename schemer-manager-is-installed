@@ -2,12 +2,12 @@
 
 set -e
 
-./usage 1 "dbvm manager is-installed <database-configuration-path>" "$@"
+./usage 1 "schemer manager is-installed <database-configuration-path>" "$@"
 
 database_configuration_path=$1
 
 source apply-configuration $database_configuration_path
 
-./dbvm-query $database_configuration_path &> /dev/null << EOF
+./query $database_configuration_path &> /dev/null << EOF
 SELECT "id" FROM "$versioning_schema"."database_version";
 EOF

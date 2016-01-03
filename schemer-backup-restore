@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -e
+
+./usage 2 "schemer backup restore <database-configuration-path> <backup-path>" "$@"
+
+database_configuration_path=$1
+backup_path=$2
+
+if [ ! -f $backup_path ]; then
+	./error "schemer: Path \"$backup_path\" does not exist."
+fi
+
+./query $database_configuration_path < $backup_path

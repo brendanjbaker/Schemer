@@ -2,12 +2,12 @@
 
 set -e
 
-./usage 1 "dbvm version read-database <database-configuration-path>" "$@"
+./usage 1 "schemer version read-database <database-configuration-path>" "$@"
 
 database_configuration_path=$1
 
 source apply-configuration $database_configuration_path
 
-./dbvm-query $database_configuration_path 2> /dev/null << EOF
+./query $database_configuration_path 2> /dev/null << EOF
 SELECT MAX("id") FROM "$versioning_schema"."database_version";
 EOF
