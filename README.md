@@ -70,3 +70,5 @@ Applying update #3 (/d/code/db-test/3_test3-gamma.sql)...
 Up-to-date.
 ```
 
+If an error is encountered during any update, dbvm exits immediately. Remediate the problem, then issue the update command again to complete the operation.
+
