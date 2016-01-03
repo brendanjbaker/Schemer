@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set -e
+
+./usage 2 "dbvm backup create <database-configuration-path> <backup-path> [<database>]" "$@"
+
+database_configuration_path=$1
+backup_path=$2
+database=$3
+
+if [ -z "$database" ]; then
+	database=postgres
+fi
+
+source apply-configuration $database_configuration_path
+
+touch $backup_path
+
+pg_dump --clean $database \
+	--host=$host \
+	--username=$username > $backup_path
