@@ -31,7 +31,13 @@ DBVM does not handle passwords directly -- if you are using password or MD5 auth
 
 ## Adding versioning to your project
 
-To begin using dbvm on your database, make certain that the schema specified in your database configuration file exists, then run:
+To begin using dbvm on your database, make certain that the schema specified in your database configuration file exists:
+
+```
+psql --command="CREATE SCHEMA widget_versioning AUTHORIZATION john;"
+```
+
+Then run:
 
 ```
 dbvm manager install ~/my-database-configuration-file
