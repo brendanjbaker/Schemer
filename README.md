@@ -3,7 +3,7 @@ Version 0.1.1
 
 ## About
 
-Database Version Manager (dbvm) helps manage database schema versioning. Database versions are represented by sequential integers. Versioning information is stored in a special versioning schema. Source version information is determined by update filenames:
+Database Version Manager (dbvm) helps manage database schema versioning. Database versions are represented by sequential integers. Versioning information is stored in a special versioning schema. Source versions are determined by filenames:
 
 ```
 1.sql                        # Update 1
