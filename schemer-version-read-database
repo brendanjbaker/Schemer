@@ -8,6 +8,6 @@ database_configuration_path=$1
 
 source apply-configuration $database_configuration_path
 
-./schemer-query $database_configuration_path 2> /dev/null << EOF
+./query $database_configuration_path 2> /dev/null << EOF
 SELECT MAX("id") FROM "$versioning_schema"."database_version";
 EOF

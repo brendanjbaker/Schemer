@@ -8,7 +8,7 @@ database_configuration_path=$1
 
 source apply-configuration $database_configuration_path
 
-./schemer-query $database_configuration_path << EOF
+./query $database_configuration_path << EOF
 CREATE TABLE "$versioning_schema"."database_version"
 (
 	"id" INTEGER NOT NULL,

@@ -31,7 +31,7 @@ to=$source_version
 
 for i in $(seq $from $to); do
 	echo "Applying update #$i ($(readlink -f $source_path/$i*.sql))..."
-	cat $source_path/$i*.sql | ./schemer-query $database_configuration_path
+	cat $source_path/$i*.sql | ./query $database_configuration_path
 	./schemer-version-write-database $database_configuration_path $i
 done
 

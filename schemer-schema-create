@@ -22,7 +22,7 @@ fi
 
 source apply-configuration $database_configuration_path
 
-./schemer-query $database_configuration_path <<EOF
+./query $database_configuration_path <<EOF
 CREATE SCHEMA "$schema_name" AUTHORIZATION "$username";
 EOF
 
@@ -42,7 +42,7 @@ fi
 
 while read -r path; do
 	echo "Applying \"$path\"..."
-	./schemer-query $database_configuration_path < $schema_path/$path
+	./query $database_configuration_path < $schema_path/$path
 done <<< "$order"
 
 ./schemer version write-database $database_configuration_path $version

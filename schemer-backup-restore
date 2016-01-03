@@ -11,4 +11,4 @@ if [ ! -f $backup_path ]; then
 	./error "schemer: Path \"$backup_path\" does not exist."
 fi
 
-./schemer-query $database_configuration_path < $backup_path
+./query $database_configuration_path < $backup_path

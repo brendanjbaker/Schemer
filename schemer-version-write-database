@@ -9,6 +9,6 @@ version=$2
 
 source apply-configuration $database_configuration_path
 
-./schemer-query $database_configuration_path << EOF
+./query $database_configuration_path << EOF
 INSERT INTO "$versioning_schema"."database_version" VALUES ($version, NOW());
 EOF
