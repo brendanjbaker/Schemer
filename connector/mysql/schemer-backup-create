@@ -1,0 +1,9 @@
+#!/bin/bash
+
+mysqldump \
+	--add-drop-database \
+	--all-databases \
+	--events \
+	--host=$server \
+	--user=$username > $backup_path
+

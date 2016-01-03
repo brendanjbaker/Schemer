@@ -1,0 +1,6 @@
+#!/bin/bash
+
+source connector-branch query << EOF
+DROP TABLE "schemer"."schema_version";
+DROP SCHEMA "schemer";
+EOF

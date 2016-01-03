@@ -2,13 +2,11 @@
 
 set -e
 
-./usage 2 "schemer version write-database <database-configuration-path> <version>" "$@"
+./usage 3 "schemer version write-database <database-configuration-path> <schema> <version>" "$@"
 
 database_configuration_path=$1
-version=$2
+schema=$2
+version=$3
 
 source apply-configuration $database_configuration_path
-
-./query $database_configuration_path << EOF
-INSERT INTO "$versioning_schema"."database_version" VALUES ($version, NOW());
-EOF
+source connector-branch schemer-version-write-database $schema $version

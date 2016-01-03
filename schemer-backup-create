@@ -2,20 +2,21 @@
 
 set -e
 
-./usage 2 "schemer backup create <database-configuration-path> <backup-path> [<database>]" "$@"
+./usage 2 "schemer backup create <database-configuration-path> <backup-path>" "$@"
 
 database_configuration_path=$1
 backup_path=$2
-database=$3
 
-if [ -z "$database" ]; then
-	database=postgres
+if [ -f $backup_path ]; then
+	./error "schemer: Refusing to overwrite previous backup \"$backup_path\"."
 fi
 
 source apply-configuration $database_configuration_path
 
 touch $backup_path
+chmod 600 $backup_path
 
-pg_dump --clean $database \
-	--host=$host \
-	--username=$username > $backup_path
+source connector-branch schemer-backup-create
+
+chmod 400 $backup_path
+

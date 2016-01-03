@@ -21,10 +21,7 @@ if ! ./schemer manager is-installed $database_configuration_path; then
 fi
 
 source apply-configuration $database_configuration_path
-
-./query $database_configuration_path <<EOF
-CREATE SCHEMA "$schema_name" AUTHORIZATION "$username";
-EOF
+source connector-branch create-schema $schema_name
 
 version=$(cat $schema_path/.version)
 
@@ -42,10 +39,10 @@ fi
 
 while read -r path; do
 	echo "Applying \"$path\"..."
-	./query $database_configuration_path < $schema_path/$path
+	source connector-branch query < $schema_path/$path
 done <<< "$order"
 
-./schemer version write-database $database_configuration_path $version
+source connector-branch schemer-version-write-database $schema_name $version
 
 echo
 echo "Up-to-date."

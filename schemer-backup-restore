@@ -7,8 +7,11 @@ set -e
 database_configuration_path=$1
 backup_path=$2
 
+source apply-configuration $database_configuration_path
+
 if [ ! -f $backup_path ]; then
 	./error "schemer: Path \"$backup_path\" does not exist."
 fi
 
-./query $database_configuration_path < $backup_path
+source connector-branch query $database_configuration_path < $backup_path
+
