@@ -1,5 +1,4 @@
 # Database Version Manager (DBVM)
-Version 0.1.1
 
 ## About
 
