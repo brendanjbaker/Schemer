@@ -11,7 +11,7 @@ Database Version Manager (dbvm) helps manage database schema versioning. Databas
 3_.sql                       # Update 3
 ```
 
-dbvm currently supports recent Postgres versions. Support for other database systems is possible -- submit a pull request!
+dbvm currently only supports Postgres servers. Support for other database systems is possible -- pull requests are welcomed.
 
 ## Installing dbvm
 
