@@ -9,6 +9,6 @@ version=$2
 
 source apply-configuration $database_configuration_path
 
-./dbvm-query $database_configuration_path 2> /dev/null << EOF
+./dbvm-query $database_configuration_path << EOF
 INSERT INTO "$versioning_schema"."database_version" VALUES ($version, NOW());
 EOF
