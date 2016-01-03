@@ -1,0 +1,35 @@
+#!/bin/bash
+
+set -e
+
+usage() {
+	echo "usage: dbvm schema <command> [<arguments>]"
+	echo
+	echo "Supported commands are:"
+	echo "create    Create schema"
+	echo "destroy   Destroy schema"
+	echo
+}
+
+if [ $# -lt 1 ]; then
+	usage >&2
+	exit 1
+fi
+
+command=$1
+
+case $command in
+	create)
+		./dbvm-schema-create "${@:2}"
+		;;
+
+	destroy)
+		./dbvm-schema-destroy "${@:2}"
+		;;
+
+	*)
+		echo "dbvm: '$command' is not a recognized command." >&2
+		echo >&2
+		usage >&2
+		exit 1
+esac
