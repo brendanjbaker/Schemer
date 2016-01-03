@@ -9,6 +9,7 @@ usage() {
 	echo "backup      Manage backups"
 	echo "install     Install dbvm to /usr/local/bin"
 	echo "manager     Manage management"
+	echo "schema      Manage schemas"
 	echo "uninstall   Uninstall dbvm from /usr/local/bin"
 	echo "version     Manage versions"
 	echo
@@ -33,6 +34,10 @@ case $command in
 
 	manager)
 		./dbvm-manager "${@:2}"
+		;;
+
+	schema)
+		./dbvm-schema "${@:2}"
 		;;
 
 	uninstall)

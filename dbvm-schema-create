@@ -1,0 +1,52 @@
+#!/bin/bash
+
+set -e
+
+./usage 3 "dbvm schema create <database-configuration-path> <schema-name> <schema-path>" "$@"
+
+database_configuration_path=$1
+schema_name=$2
+schema_path=$3
+
+if [ ! -d $schema_path ]; then
+	./error "Path \"$schema_path\" not found."
+fi
+
+if [ ! -f $schema_path/.version ]; then
+	./error "dbvm: \".version\" file not present in \"$schema_path\"."
+fi
+
+if ! ./dbvm manager is-installed $database_configuration_path; then
+	./dbvm manager install $database_configuration_path
+fi
+
+source apply-configuration $database_configuration_path
+
+./dbvm-query $database_configuration_path <<EOF
+CREATE SCHEMA "$schema_name" AUTHORIZATION "$username";
+EOF
+
+version=$(cat $schema_path/.version)
+
+if [ -f $schema_path/.order ]; then
+	echo "Found order file: \"$schema_path/.order\""
+	echo
+
+	order=$(cat $schema_path/.order)
+else
+	echo "Did not find .order file; defaulting to alphabetical order."
+	echo
+
+	order=$(ls -1 $schema_path | grep "\.sql$" | sort)
+fi
+
+while read -r path; do
+	echo "Applying \"$path\"..."
+	./dbvm-query $database_configuration_path < $schema_path/$path
+done <<< "$order"
+
+./dbvm version write-database $database_configuration_path $version
+
+echo
+echo "Up-to-date."
+echo
