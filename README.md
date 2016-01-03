@@ -27,7 +27,7 @@ username=john
 versioning_schema=widget_versioning
 ```
 
-DBVM does not handle passwords directly -- if you are using password or MD5 authentication, please eensure your [~/.pgpass](http://www.postgresql.org/docs/current/static/libpq-pgpass.html) file is up-to-date.
+DBVM does not handle passwords directly -- if you are using password or MD5 authentication, please ensure your [~/.pgpass](http://www.postgresql.org/docs/current/static/libpq-pgpass.html) file is up-to-date.
 
 ## Adding versioning to your project
 
