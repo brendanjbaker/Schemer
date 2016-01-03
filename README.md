@@ -6,6 +6,7 @@ Version 0.1.1
 To install dbvm onto your path, run:
 
 ```
+cd place/where/you/put/dbvm
 ./dbvm install
 ```
 
