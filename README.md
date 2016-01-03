@@ -17,7 +17,8 @@ dbvm currently only supports Postgres. Support for other database systems is pos
 To install dbvm onto your path, run:
 
 ```
-cd place/where/you/put/dbvm
+git clone git@github.com:brendanjbaker/dbvm.git
+cd dbvm
 ./dbvm install
 ```
 
