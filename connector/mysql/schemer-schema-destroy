@@ -1,0 +1,6 @@
+#!/bin/bash
+
+source connector-branch query << EOF
+DROP DATABASE \`$schema_name\`;
+EOF
+

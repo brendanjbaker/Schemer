@@ -1,0 +1,5 @@
+#!/bin/bash
+
+source connector-branch query << EOF
+CREATE DATABASE \`$schema_name\`;
+EOF

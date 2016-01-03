@@ -1,0 +1,5 @@
+#!/bin/bash
+
+source connector-branch query << EOF
+CREATE SCHEMA "$schema_name" AUTHORIZATION "$username";
+EOF

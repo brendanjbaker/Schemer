@@ -7,7 +7,4 @@ set -e
 database_configuration_path=$1
 
 source apply-configuration $database_configuration_path
-
-./query $database_configuration_path << EOF
-DROP TABLE "$versioning_schema"."database_version";
-EOF
+source connector-branch schemer-manager-uninstall

@@ -2,12 +2,10 @@
 
 set -e
 
-./usage 1 "schemer version read-database <database-configuration-path>" "$@"
+./usage 2 "schemer version read-database <database-configuration-path> <schema>" "$@"
 
 database_configuration_path=$1
+schema=$2
 
 source apply-configuration $database_configuration_path
-
-./query $database_configuration_path 2> /dev/null << EOF
-SELECT MAX("id") FROM "$versioning_schema"."database_version";
-EOF
+source connector-branch schemer-version-read-database $schema

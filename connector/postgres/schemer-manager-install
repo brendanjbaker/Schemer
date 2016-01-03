@@ -1,0 +1,13 @@
+#!/bin/bash
+
+source connector-branch query << EOF
+CREATE SCHEMA "schemer" AUTHORIZATION "$username";
+
+CREATE TABLE "schemer"."schema_version"
+(
+	"schema" TEXT NOT NULL,
+	"version" INT NOT NULL,
+	"created" TIMESTAMP NOT NULL,
+	"deleted" TIMESTAMP
+);
+EOF

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+source connector-branch query << EOF
+DROP SCHEMA "$schema_name" CASCADE;
+EOF
