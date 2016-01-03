@@ -57,3 +57,16 @@ To update your database schema version to your source schema version, use `dbvm 
 dbvm version update ~/my-database-configuration-file ~/code/widget-project/database/versions/
 ```
 
+dbvm will identify the database and source versions it detected, then apply each update necessary:
+
+```
+Database version: 0
+Source version: 3
+
+Applying update #1 (/d/code/db-test/1_test1-alpha.sql)...
+Applying update #2 (/d/code/db-test/2_test2-beta.sql)...
+Applying update #3 (/d/code/db-test/3_test3-gamma.sql)...
+
+Up-to-date.
+```
+
