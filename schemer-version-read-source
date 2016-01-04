@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 source usage 1 "schemer version read-source <source-path>" "$@"
 
 source_path=$1

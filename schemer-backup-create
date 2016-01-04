@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 source usage 2 "schemer backup create <database-configuration-path> <backup-path>" "$@"
 
 database_configuration_path=$1

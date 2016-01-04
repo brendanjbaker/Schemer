@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 source usage 2 "schemer schema destroy <database-configuration-path> <schema-name> <backup-path>" "$@"
 
 database_configuration_path=$1

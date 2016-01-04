@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 source usage 3 "schemer schema create <database-configuration-path> <schema-name> <schema-path>" "$@"
 
 database_configuration_path=$1

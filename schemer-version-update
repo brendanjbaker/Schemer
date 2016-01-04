@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 source usage 2 "usage: schemer version update <database-configuration-path> <source-path>" "$@"
 
 database_configuration_path=$1

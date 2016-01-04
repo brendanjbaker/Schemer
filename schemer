@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -eu
 
 usage() {
 	echo "usage: schemer [--version] <command> [<arguments>]"

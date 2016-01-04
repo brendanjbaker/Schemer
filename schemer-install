@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 script_path=$(readlink -f ./schemer)
 bin_path=/usr/local/bin/schemer
 

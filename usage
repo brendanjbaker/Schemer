@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 print_usage() {
 	if [ $# -eq 0 ]; then
 		print_usage "usage <argument-count> <usage-help> <arguments>"

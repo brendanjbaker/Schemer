@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 usage() {
 	echo "usage: schemer schema <command> [<arguments>]"
 	echo

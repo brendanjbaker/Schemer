@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 source usage 2 "schemer version read-database <database-configuration-path> <schema>" "$@"
 
 database_configuration_path=$1
