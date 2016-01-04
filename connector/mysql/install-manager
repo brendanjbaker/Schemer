@@ -1,9 +1,9 @@
 #!/bin/bash
 
 source connector-branch query << 'EOF'
-CREATE DATABASE `schemer`;
+CREATE DATABASE IF NOT EXISTS `schemer`;
 
-CREATE TABLE `schemer`.`schema_version`
+CREATE TABLE IF NOT EXISTS `schemer`.`schema_version`
 (
 	`schema` VARCHAR(255) NOT NULL,
 	`version` INTEGER NOT NULL,
