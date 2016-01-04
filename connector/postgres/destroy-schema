@@ -3,7 +3,9 @@
 source connector-branch query << EOF
 UPDATE "schemer"."schema_version"
 SET "deleted" = CURRENT_TIMESTAMP
-WHERE "schema" = '$schema_name';
+WHERE "schema" = '$schema_name'
+AND "deleted" IS NULL;
 
 DROP SCHEMA "$schema_name" CASCADE;
 EOF
+

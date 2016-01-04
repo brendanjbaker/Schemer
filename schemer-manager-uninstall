@@ -1,8 +1,0 @@
-#!/bin/bash
-
-source usage 1 "schemer manager uninstall <database-configuration-path>" "$@"
-
-database_configuration_path=$1
-
-source apply-configuration $database_configuration_path
-source connector-branch schemer-manager-uninstall

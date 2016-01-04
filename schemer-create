@@ -1,0 +1,13 @@
+#!/bin/bash
+
+source usage 2 "usage: schemer create <database-configuration-path> <schema-name>" "$@"
+
+database_configuration_path=$1
+schema_name=$2
+
+source apply-configuration $database_configuration_path
+
+# todo: install manager if needed
+
+source connector-branch create-schema $schema_name
+

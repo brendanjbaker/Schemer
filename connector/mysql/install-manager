@@ -11,3 +11,4 @@ CREATE TABLE `schemer`.`schema_version`
 	`deleted` DATETIME
 );
 EOF
+

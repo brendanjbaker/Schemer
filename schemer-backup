@@ -1,33 +1,20 @@
 #!/bin/bash
 
-usage() {
-	echo "usage: schemer backup <command> [<arguments>]"
-	echo
-	echo "Supported commands are:"
-	echo "create    Create backup"
-	echo "restore   Restore backup"
-	echo
-}
+source usage 2 "usage: schemer backup <database-configuration-path> <backup-path>" "$@"
 
-if [ $# -lt 1 ]; then
-	usage >&2
-	exit 1
+database_configuration_path=$1
+backup_path=$2
+
+source apply-configuration $database_configuration_path
+
+if [ -f $backup_path ]; then
+	source error "schemer: Refusing to overwrite previous backup \"$backup_path\"."
 fi
 
-command=$1
+touch $backup_path
+chmod 600 $backup_path
 
-case $command in
-	create)
-		source schemer-backup-create "${@:2}"
-		;;
+source connector-branch create-backup
 
-	restore)
-		source schemer-backup-restore "${@:2}"
-		;;
+chmod 400 $backup_path
 
-	*)
-		echo "schemer: '$command' is not a recognized command." >&2
-		echo >&2
-		usage >&2
-		exit 1
-esac

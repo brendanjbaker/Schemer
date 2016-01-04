@@ -3,3 +3,4 @@
 source connector-branch query << EOF
 CREATE DATABASE IF NOT EXISTS \`$schema_name\`;
 EOF
+

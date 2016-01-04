@@ -3,3 +3,4 @@
 source usage 1 "warn <message>" "$@"
 
 echo "$1" 1>&2
+

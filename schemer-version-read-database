@@ -1,9 +1,0 @@
-#!/bin/bash
-
-source usage 2 "schemer version read-database <database-configuration-path> <schema>" "$@"
-
-database_configuration_path=$1
-schema=$2
-
-source apply-configuration $database_configuration_path
-source connector-branch schemer-version-read-database $schema

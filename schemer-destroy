@@ -1,0 +1,10 @@
+#!/bin/bash
+
+source usage 2 "usage: schemer destroy <database-configuration-path> <schema-name>" "$@"
+
+database_configuration_path=$1
+schema_name=$2
+
+source apply-configuration $database_configuration_path
+source connector-branch destroy-schema $schema_name
+

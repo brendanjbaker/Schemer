@@ -1,5 +1,0 @@
-#!/bin/bash
-
-source connector-branch query << 'EOF'
-DROP DATABASE `schemer`;
-EOF
