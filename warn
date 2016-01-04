@@ -2,6 +2,6 @@
 
 set -e
 
-./usage 1 "warn <message>" "$@"
+source usage 1 "warn <message>" "$@"
 
 echo "$1" 1>&2

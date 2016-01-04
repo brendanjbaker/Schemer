@@ -2,12 +2,12 @@
 
 set -e
 
-./usage 1 "schemer version read-source <source-path>" "$@"
+source usage 1 "schemer version read-source <source-path>" "$@"
 
 source_path=$1
 
 if [ ! -d $source_path ]; then
-	./error "schemer: Source path '$source_path' not found."
+	source error "schemer: Source path '$source_path' not found."
 fi
 
 ls -1 $source_path |\

@@ -12,7 +12,7 @@ usage() {
 }
 
 if [ $# -lt 1 ]; then
-	usage >&2
+	source usage >&2
 	exit 1
 fi
 
@@ -20,11 +20,11 @@ command=$1
 
 case $command in
 	create)
-		./schemer-backup-create "${@:2}"
+		source schemer-backup-create "${@:2}"
 		;;
 
 	restore)
-		./schemer-backup-restore "${@:2}"
+		source schemer-backup-restore "${@:2}"
 		;;
 
 	*)

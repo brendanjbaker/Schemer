@@ -2,18 +2,18 @@
 
 set -e
 
-./usage 3 "schemer schema create <database-configuration-path> <schema-name> <schema-path>" "$@"
+source usage 3 "schemer schema create <database-configuration-path> <schema-name> <schema-path>" "$@"
 
 database_configuration_path=$1
 schema_name=$2
 schema_path=$3
 
 if [ ! -d $schema_path ]; then
-	./error "Path \"$schema_path\" not found."
+	source error "Path \"$schema_path\" not found."
 fi
 
 if [ ! -f $schema_path/.version ]; then
-	./error "schemer: \".version\" file not present in \"$schema_path\"."
+	source error "schemer: \".version\" file not present in \"$schema_path\"."
 fi
 
 if ! ./schemer manager is-installed $database_configuration_path; then

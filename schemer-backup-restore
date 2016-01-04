@@ -2,7 +2,7 @@
 
 set -e
 
-./usage 2 "schemer backup restore <database-configuration-path> <backup-path>" "$@"
+source usage 2 "schemer backup restore <database-configuration-path> <backup-path>" "$@"
 
 database_configuration_path=$1
 backup_path=$2
@@ -10,7 +10,7 @@ backup_path=$2
 source apply-configuration $database_configuration_path
 
 if [ ! -f $backup_path ]; then
-	./error "schemer: Path \"$backup_path\" does not exist."
+	source error "schemer: Path \"$backup_path\" does not exist."
 fi
 
 source connector-branch query $database_configuration_path < $backup_path

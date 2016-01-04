@@ -2,7 +2,7 @@
 
 set -e
 
-./usage 2 "schemer schema destroy <database-configuration-path> <schema-name> <backup-path>" "$@"
+source usage 2 "schemer schema destroy <database-configuration-path> <schema-name> <backup-path>" "$@"
 
 database_configuration_path=$1
 schema_name=$2
@@ -12,7 +12,7 @@ source apply-configuration $database_configuration_path
 
 ./schemer backup create $database_configuration_path $backup_path
 
-./query $database_configuration_path <<EOF
+source query $database_configuration_path <<EOF
 DELETE FROM "$versioning_schema"."database_version";
 DROP SCHEMA "$schema_name" CASCADE;
 EOF

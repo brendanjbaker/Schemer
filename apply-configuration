@@ -2,34 +2,34 @@
 
 set -e
 
-./usage 1 "query <configuration-path>" "$@"
+source usage 1 "query <configuration-path>" "$@"
 
 configuration_path=$1
 
 if [ ! -f $configuration_path ]; then
-	./error "schemer: Configuration '$configuration_path' not found."
+	source error "schemer: Configuration '$configuration_path' not found."
 fi
 
 source $configuration_path
 
 if [ -z "$server" ]; then
-	./error "schemer: \"server\" variable not defined in configuration. $host"
+	source error "schemer: \"server\" variable not defined in configuration. $host"
 fi
 
 if [ -z "$server_type" ]; then
-	./error "schemer: \"server_type\" variable not defined in configuration. $host"
+	source error "schemer: \"server_type\" variable not defined in configuration. $host"
 fi
 
 if [ -z "$username" ]; then
-	./error "schemer: \"username\" variable not defined in configuration."
+	source error "schemer: \"username\" variable not defined in configuration."
 fi
 
 if [ ! -d ./connector/$server_type ]; then
-	./error "schemer: Server type \"$server_type\" unsupported."
+	source error "schemer: Server type \"$server_type\" unsupported."
 fi
 
 if [ "$server_type" == "postgres" ]; then
 	if [ -z "$postgres_database" ]; then
-		./error "schemer: \"postgres_database\" variable not defined in configuration."
+		source error "schemer: \"postgres_database\" variable not defined in configuration."
 	fi
 fi

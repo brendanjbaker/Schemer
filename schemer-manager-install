@@ -2,7 +2,7 @@
 
 set -e
 
-./usage 1 "schemer manager install <database-configuration-path>" "$@"
+source usage 1 "schemer manager install <database-configuration-path>" "$@"
 
 database_configuration_path=$1
 

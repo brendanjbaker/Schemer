@@ -2,7 +2,7 @@
 
 set -e
 
-./usage 2 "schemer version read-database <database-configuration-path> <schema>" "$@"
+source usage 2 "schemer version read-database <database-configuration-path> <schema>" "$@"
 
 database_configuration_path=$1
 schema=$2
