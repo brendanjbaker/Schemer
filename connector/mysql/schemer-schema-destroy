@@ -1,6 +1,12 @@
 #!/bin/bash
 
 source connector-branch query << EOF
+USE \`schemer\`;
+
+UPDATE \`schema_version\`
+SET \`deleted\` = UTC_TIMESTAMP()
+WHERE \`schema\` = '$schema_name';
+
 DROP DATABASE \`$schema_name\`;
 EOF
 
