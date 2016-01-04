@@ -1,0 +1,9 @@
+#!/bin/bash
+
+source connector-branch query << EOF
+SELECT COALESCE(MAX("version"), -1)
+FROM "schemer"."schema_version"
+WHERE "schema" = '$schema'
+AND "deleted" IS NULL;
+
+EOF

@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 usage() {
 	echo "usage: schemer schema <command> [<arguments>]"
 	echo
@@ -20,11 +18,11 @@ command=$1
 
 case $command in
 	create)
-		./schemer-schema-create "${@:2}"
+		source schemer-schema-create "${@:2}"
 		;;
 
 	destroy)
-		./schemer-schema-destroy "${@:2}"
+		source schemer-schema-destroy "${@:2}"
 		;;
 
 	*)

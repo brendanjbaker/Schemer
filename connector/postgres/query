@@ -1,0 +1,10 @@
+#!/bin/bash
+
+psql \
+	--dbname=$postgres_database \
+	--host $server \
+	--pset "format=unaligned" \
+	--pset "tuples_only=on" \
+	--quiet \
+	--set "ON_ERROR_STOP=on" \
+	--username $username

@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 bin_path=/usr/local/bin/schemer
 
 if [ -h $bin_path ]; then

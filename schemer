@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -eu
 
 usage() {
 	echo "usage: schemer [--version] <command> [<arguments>]"
@@ -23,33 +23,35 @@ fi
 command=$1
 cd $(dirname $(readlink -f $0))
 
+version=$(cat version)
+
 case $command in
 	backup)
-		./schemer-backup "${@:2}"
+		source schemer-backup "${@:2}"
 		;;
 
 	install)
-		./schemer-install "${@:2}"
+		source schemer-install "${@:2}"
 		;;
 
 	manager)
-		./schemer-manager "${@:2}"
+		source schemer-manager "${@:2}"
 		;;
 
 	schema)
-		./schemer-schema "${@:2}"
+		source schemer-schema "${@:2}"
 		;;
 
 	uninstall)
-		./schemer-uninstall "${@:2}"
+		source schemer-uninstall "${@:2}"
 		;;
 
 	version)
-		./schemer-version "${@:2}"
+		source schemer-version "${@:2}"
 		;;
 
 	--version)
-		echo "schemer version 0.1.0"
+		echo "schemer version $version"
 		exit 0
 		;;
 
@@ -59,3 +61,4 @@ case $command in
 		usage >&2
 		exit 1
 esac
+

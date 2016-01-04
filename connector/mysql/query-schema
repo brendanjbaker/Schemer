@@ -1,0 +1,8 @@
+#!/bin/bash
+
+mysql \
+	--host=$server \
+	--silent \
+	--user=$username \
+	$schema_name
+

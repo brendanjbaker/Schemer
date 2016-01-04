@@ -1,52 +1,10 @@
 #!/bin/bash
 
-set -e
-
-./usage 3 "schemer schema create <database-configuration-path> <schema-name> <schema-path>" "$@"
+source usage 2 "schemer schema create <database-configuration-path> <schema-name>" "$@"
 
 database_configuration_path=$1
 schema_name=$2
-schema_path=$3
-
-if [ ! -d $schema_path ]; then
-	./error "Path \"$schema_path\" not found."
-fi
-
-if [ ! -f $schema_path/.version ]; then
-	./error "schemer: \".version\" file not present in \"$schema_path\"."
-fi
-
-if ! ./schemer manager is-installed $database_configuration_path; then
-	./schemer manager install $database_configuration_path
-fi
 
 source apply-configuration $database_configuration_path
+source connector-branch schemer-schema-create $schema_name
 
-./query $database_configuration_path <<EOF
-CREATE SCHEMA "$schema_name" AUTHORIZATION "$username";
-EOF
-
-version=$(cat $schema_path/.version)
-
-if [ -f $schema_path/.order ]; then
-	echo "Found order file: \"$schema_path/.order\""
-	echo
-
-	order=$(cat $schema_path/.order)
-else
-	echo "Did not find .order file; defaulting to alphabetical order."
-	echo
-
-	order=$(ls -1 $schema_path | grep "\.sql$" | sort)
-fi
-
-while read -r path; do
-	echo "Applying \"$path\"..."
-	./query $database_configuration_path < $schema_path/$path
-done <<< "$order"
-
-./schemer version write-database $database_configuration_path $version
-
-echo
-echo "Up-to-date."
-echo

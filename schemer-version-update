@@ -1,16 +1,15 @@
 #!/bin/bash
 
-set -e
-
-./usage 2 "usage: schemer version update <database-configuration-path> <source-path>" "$@"
+source usage 3 "usage: schemer version update <database-configuration-path> <source-path> <schema-name>" "$@"
 
 database_configuration_path=$1
 source_path=$2
+schema_name=$3
 
 source apply-configuration $database_configuration_path
 
-database_version=$(./schemer-version-read-database $database_configuration_path)
-source_version=$(./schemer-version-read-source $source_path)
+database_version=$(source schemer-version-read-database $database_configuration_path $schema_name)
+source_version=$(source schemer-version-read-source $source_path)
 
 echo "Database version: $database_version"
 echo "Source version: $source_version"
@@ -23,7 +22,7 @@ if [ $database_version -eq $source_version ]; then
 fi
 
 if [ $database_version -gt $source_version ]; then
-	./error "schemer: Database is ahead of source; cannot update."
+	source error "schemer: Database is ahead of source; cannot update."
 fi
 
 from=$(($database_version+1))
@@ -31,8 +30,8 @@ to=$source_version
 
 for i in $(seq $from $to); do
 	echo "Applying update #$i ($(readlink -f $source_path/$i*.sql))..."
-	cat $source_path/$i*.sql | ./query $database_configuration_path
-	./schemer-version-write-database $database_configuration_path $i
+	cat $source_path/$i*.sql | source connector-branch query-schema $schema_name
+	source schemer-version-write-database $database_configuration_path $schema_name $i
 done
 
 echo

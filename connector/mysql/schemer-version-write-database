@@ -1,0 +1,17 @@
+#!/bin/bash
+
+source connector-branch query << EOF
+USE schemer;
+
+INSERT INTO schema_version (
+	\`schema\`,
+	\`version\`,
+	\`created\`,
+	\`deleted\`)
+VALUES (
+	'$schema',
+	$version,
+	UTC_TIMESTAMP(),
+	NULL);
+
+EOF

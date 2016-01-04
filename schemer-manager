@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 usage() {
 	echo "usage: schemer manager <command> [<arguments>]"
 	echo
@@ -21,15 +19,15 @@ command=$1
 
 case $command in
 	install)
-		./schemer-manager-install "${@:2}"
+		source schemer-manager-install "${@:2}"
 		;;
 
 	is-installed)
-		./schemer-manager-is-installed "${@:2}"
+		source schemer-manager-is-installed "${@:2}"
 		;;
 
 	uninstall)
-		./schemer-manager-uninstall "${@:2}"
+		source schemer-manager-uninstall "${@:2}"
 		;;
 
 	*)
@@ -38,3 +36,4 @@ case $command in
 		usage >&2
 		exit 1
 esac
+

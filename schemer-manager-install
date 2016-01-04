@@ -1,23 +1,8 @@
 #!/bin/bash
 
-set -e
-
-./usage 1 "schemer manager install <database-configuration-path>" "$@"
+source usage 1 "schemer manager install <database-configuration-path>" "$@"
 
 database_configuration_path=$1
 
 source apply-configuration $database_configuration_path
-
-./query $database_configuration_path << EOF
-CREATE TABLE "$versioning_schema"."database_version"
-(
-	"id" INTEGER NOT NULL,
-	"created" TIMESTAMP NOT NULL
-);
-
-ALTER TABLE "$versioning_schema"."database_version"
-	ADD PRIMARY KEY ("id");
-
-INSERT INTO "$versioning_schema"."database_version" VALUES (0, NOW());
-EOF
-
+source connector-branch schemer-manager-install

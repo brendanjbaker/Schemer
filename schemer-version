@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 usage() {
 	echo "usage: schemer version <command> [<arguments>]"
 	echo
@@ -22,19 +20,19 @@ command=$1
 
 case $command in
 	read-database)
-		./schemer-version-read-database "${@:2}"
+		source schemer-version-read-database "${@:2}"
 		;;
 
 	read-source)
-		./schemer-version-read-source "${@:2}"
+		source schemer-version-read-source "${@:2}"
 		;;
 
 	update)
-		./schemer-version-update "${@:2}"
+		source schemer-version-update "${@:2}"
 		;;
 
 	write-database)
-		./schemer-version-write-database "${@:2}"
+		source schemer-version-write-database "${@:2}"
 		;;
 
 	*)

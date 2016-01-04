@@ -1,18 +1,10 @@
 #!/bin/bash
 
-set -e
-
-./usage 2 "schemer schema destroy <database-configuration-path> <schema-name> <backup-path>" "$@"
+source usage 2 "schemer schema destroy <database-configuration-path> <schema-name>" "$@"
 
 database_configuration_path=$1
 schema_name=$2
-backup_path=$3
 
 source apply-configuration $database_configuration_path
+source connector-branch schemer-schema-destroy
 
-./schemer backup create $database_configuration_path $backup_path
-
-./query $database_configuration_path <<EOF
-DELETE FROM "$versioning_schema"."database_version";
-DROP SCHEMA "$schema_name" CASCADE;
-EOF

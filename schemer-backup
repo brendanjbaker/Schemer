@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 usage() {
 	echo "usage: schemer backup <command> [<arguments>]"
 	echo
@@ -20,11 +18,11 @@ command=$1
 
 case $command in
 	create)
-		./schemer-backup-create "${@:2}"
+		source schemer-backup-create "${@:2}"
 		;;
 
 	restore)
-		./schemer-backup-restore "${@:2}"
+		source schemer-backup-restore "${@:2}"
 		;;
 
 	*)

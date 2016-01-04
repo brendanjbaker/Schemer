@@ -1,0 +1,15 @@
+#!/bin/bash
+
+source connector-branch query << EOF
+INSERT INTO "schemer"."schema_version" (
+	"schema",
+	"version",
+	"created",
+	"deleted")
+VALUES (
+	'$schema',
+	$version,
+	CURRENT_TIMESTAMP,
+	NULL);
+
+EOF
