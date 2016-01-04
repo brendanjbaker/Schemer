@@ -6,5 +6,5 @@ database_configuration_path=$1
 schema_name=$2
 
 source apply-configuration $database_configuration_path
-source connector-branch create-schema $schema_name
+source connector-branch schemer-schema-create $schema_name
 

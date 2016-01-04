@@ -4,4 +4,4 @@ source usage 1 "connector-branch <command> [arguments]" "$@"
 
 command=$1
 
-source connector/$server_type/$command ${@:3}
+source connector/$server_type/$command "${@:1}"
