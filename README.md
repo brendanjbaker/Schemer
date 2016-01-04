@@ -31,7 +31,7 @@ cd place/where/you/put/schemer
 
 ## Configuring Schemer
 
-Most `schemer` commands take a configuration file parameter. This configuration path alleviates having to specify the database server, username, versioning schema name, etc., in every operation. You may place a Schemer configuration file anywhere. Its format is:
+Most `schemer` commands take a configuration file parameter. This configuration path alleviates having to specify the database server, username, etc., in every operation. You may place a Schemer configuration file anywhere. Its format is:
 
 ```
 # Hostname or IP address of your database server
@@ -47,14 +47,14 @@ username=john
 postgres_database=postgres
 ```
 
-Schemer does not handle passwords directly. If you are using password or MD5 authentication, please ensure your [~/.pgpass](http://www.postgresql.org/docs/current/static/libpq-pgpass.html) file is up-to-date.
+Schemer does not handle passwords directly. If you are Postgres, please ensure your [~/.pgpass](http://www.postgresql.org/docs/current/static/libpq-pgpass.html) file is up-to-date. If you are using MySQL, please ensure your [~/.my.cnf](http://dev.mysql.com/doc/en/option-files.html) file is up-to-date.
 
 ## Adding versioning to your project
 
-To begin using Schemer on your `widget_gallery` database, use `schemer create`:
+To begin using Schemer on your `widget` database, use `schemer create`:
 
 ```
-schemer create widget_gallery
+schemer create ~/widget-configuration widget
 ```
 
 ## Applying updates
@@ -62,7 +62,7 @@ schemer create widget_gallery
 To update your database schema version to your source schema version, use `schemer update`:
 
 ```
-schemer update ~/my-database-configuration-file ~/code/widget-project/database widget_gallery
+schemer update ~/widget-configuration widget /code/widget/database
 ```
 
 Schemer will identify the database and source versions it detected, then apply each update necessary:
@@ -71,9 +71,9 @@ Schemer will identify the database and source versions it detected, then apply e
 Database version: 0
 Source version: 3
 
-Applying update #1 (/code/widget-project/database/1_test1-alpha.sql)...
-Applying update #2 (/code/widget-project/database/2_test2-beta.sql)...
-Applying update #3 (/code/widget-project/database/3_test3-gamma.sql)...
+Applying update #1 (/code/widget/database/1_test1-alpha.sql)...
+Applying update #2 (/code/widget/database/2.sql)...
+Applying update #3 (/code/widget/database/3_test3-gamma.sql)...
 
 Up-to-date.
 ```
@@ -85,7 +85,7 @@ If an error is encountered during any update, `schemer` exits immediately. Remed
 Typing `schemer` or `schemer <command>` outputs usage and supported commands:
 
 ```
-usage: schemer [--version] <command> <database-configuration-path> [<arguments>]
+usage: schemer [--version] <command> [<arguments>]
 
 Supported commands are:
 backup    Create backup
