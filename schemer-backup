@@ -10,7 +10,7 @@ usage() {
 }
 
 if [ $# -lt 1 ]; then
-	source usage >&2
+	usage >&2
 	exit 1
 fi
 
