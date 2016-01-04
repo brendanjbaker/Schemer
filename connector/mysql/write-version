@@ -1,17 +1,23 @@
 #!/bin/bash
 
-source connector-branch query << EOF
-USE schemer;
+source usage 2 "write-version <schema-name> <version>" "$@"
 
-INSERT INTO schema_version (
+schema_name=$1
+version=$2
+
+source connector-branch query << EOF
+USE \`schemer\`;
+
+INSERT INTO \`schema_version\` (
 	\`schema\`,
 	\`version\`,
 	\`created\`,
 	\`deleted\`)
 VALUES (
-	'$schema',
+	'$schema_name',
 	$version,
 	UTC_TIMESTAMP(),
 	NULL);
 
 EOF
+

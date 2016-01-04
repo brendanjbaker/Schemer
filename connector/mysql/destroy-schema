@@ -5,7 +5,8 @@ USE \`schemer\`;
 
 UPDATE \`schema_version\`
 SET \`deleted\` = UTC_TIMESTAMP()
-WHERE \`schema\` = '$schema_name';
+WHERE \`schema\` = '$schema_name'
+AND \`deleted\` IS NULL;
 
 DROP DATABASE \`$schema_name\`;
 EOF

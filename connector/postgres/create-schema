@@ -3,3 +3,4 @@
 source connector-branch query << EOF
 CREATE SCHEMA IF NOT EXISTS "$schema_name" AUTHORIZATION "$username";
 EOF
+

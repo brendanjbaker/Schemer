@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source usage 1 "schemer version read-source <source-path>" "$@"
+source usage 1 "read-source-version <source-path>" "$@"
 
 source_path=$1
 
@@ -13,3 +13,4 @@ cut --delimiter='.' --fields=1 |\
 cut --delimiter='_' --fields=1 |
 sort --version-sort |
 tail --lines=1
+

@@ -1,0 +1,14 @@
+#!/bin/bash
+
+source usage 2 "usage: schemer restore <database-configuration-path> <backup-path>" "$@"
+
+database_configuration_path=$1
+backup_path=$2
+
+if [ ! -f $backup_path ]; then
+	source error "schemer: Path \"$backup_path\" does not exist."
+fi
+
+source apply-configuration $database_configuration_path
+source connector-branch query < $backup_path
+

@@ -1,14 +1,14 @@
 #!/bin/bash
 
-source usage 1 "query <configuration-path>" "$@"
+source usage 1 "usage: apply-configuration <database-configuration-path>" "$@"
 
-configuration_path=$1
+database_configuration_path=$1
 
-if [ ! -f $configuration_path ]; then
-	source error "schemer: Configuration '$configuration_path' not found."
+if [ ! -f $database_configuration_path ]; then
+	source error "schemer: Configuration '$database_configuration_path' not found."
 fi
 
-source $configuration_path
+source $database_configuration_path
 
 if [ -z "$server" ]; then
 	source error "schemer: \"server\" variable not defined in configuration. $host"
@@ -31,3 +31,4 @@ if [ "$server_type" == "postgres" ]; then
 		source error "schemer: \"postgres_database\" variable not defined in configuration."
 	fi
 fi
+

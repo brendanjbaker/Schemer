@@ -1,15 +1,15 @@
 #!/bin/bash
 
-source usage 3 "usage: schemer version update <database-configuration-path> <source-path> <schema-name>" "$@"
+source usage 3 "usage: schemer update <database-configuration-path> <schema-name> <source-path>" "$@"
 
 database_configuration_path=$1
-source_path=$2
-schema_name=$3
+schema_name=$2
+source_path=$3
 
 source apply-configuration $database_configuration_path
 
-database_version=$(source schemer-version-read-database $database_configuration_path $schema_name)
-source_version=$(source schemer-version-read-source $source_path)
+database_version=$(source connector-branch read-version $schema_name)
+source_version=$(source read-source-version $source_path)
 
 echo "Database version: $database_version"
 echo "Source version: $source_version"
@@ -31,9 +31,10 @@ to=$source_version
 for i in $(seq $from $to); do
 	echo "Applying update #$i ($(readlink -f $source_path/$i*.sql))..."
 	cat $source_path/$i*.sql | source connector-branch query-schema $schema_name
-	source schemer-version-write-database $database_configuration_path $schema_name $i
+	source connector-branch write-version $schema_name $i
 done
 
 echo
 echo "Up-to-date."
 echo
+

@@ -8,3 +8,4 @@ psql \
 	--quiet \
 	--set "ON_ERROR_STOP=on" \
 	--username $username
+

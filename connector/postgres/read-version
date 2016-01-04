@@ -1,9 +1,14 @@
 #!/bin/bash
 
+source usage 1 "read-version <schema-name>" "$@"
+
+schema_name=$1
+
 source connector-branch query << EOF
 SELECT COALESCE(MAX("version"), -1)
 FROM "schemer"."schema_version"
-WHERE "schema" = '$schema'
+WHERE "schema" = '$schema_name'
 AND "deleted" IS NULL;
 
 EOF
+

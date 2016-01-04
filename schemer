@@ -6,12 +6,10 @@ usage() {
 	echo "usage: schemer [--version] <command> [<arguments>]"
 	echo
 	echo "Supported commands are:"
-	echo "backup      Manage backups"
-	echo "install     Install schemer to /usr/local/bin"
-	echo "manager     Manage management"
-	echo "schema      Manage schemas"
-	echo "uninstall   Uninstall schemer from /usr/local/bin"
-	echo "version     Manage versions"
+	echo "backup    Create backup"
+	echo "create    Create schema"
+	echo "restore   Restore backup"
+	echo "update    Update schema"
 	echo
 }
 
@@ -21,38 +19,20 @@ if [ $# -lt 1 ]; then
 fi
 
 command=$1
+
 cd $(dirname $(readlink -f $0))
 
-version=$(cat version)
-
 case $command in
-	backup)
-		source schemer-backup "${@:2}"
-		;;
-
-	install)
-		source schemer-install "${@:2}"
-		;;
-
-	manager)
-		source schemer-manager "${@:2}"
-		;;
-
-	schema)
-		source schemer-schema "${@:2}"
-		;;
-
-	uninstall)
-		source schemer-uninstall "${@:2}"
-		;;
-
-	version)
-		source schemer-version "${@:2}"
+	backup|\
+	create|\
+	destroy|\
+	restore|\
+	update)
+		source schemer-$command "${@:2}"
 		;;
 
 	--version)
-		echo "schemer version $version"
-		exit 0
+		echo "schemer version $(cat version)"
 		;;
 
 	*)
