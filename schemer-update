@@ -2,9 +2,13 @@
 
 source usage 3 "usage: schemer update <database-configuration-path> <schema-name> <source-path>" "$@"
 
+cd $pwd
+
 database_configuration_path=$1
 schema_name=$2
-source_path=$3
+source_path=$(readlink -f $3)
+
+cd -> /dev/null
 
 source apply-configuration $database_configuration_path
 
