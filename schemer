@@ -19,6 +19,7 @@ if [ $# -lt 1 ]; then
 fi
 
 command=$1
+pwd=$(pwd)
 
 cd $(dirname $(readlink -f $0))
 
