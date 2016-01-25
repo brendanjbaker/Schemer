@@ -39,7 +39,7 @@ for i in $(seq $from $to); do
 		source error "schemer: Could not find \"$path\"; aborting."
 	fi
 
-	echo "Applying update #$i ($path)..."
+	echo "Applying update #$i ($(basename $path))..."
 	cat $path | source connector-branch query-schema $schema_name
 	source connector-branch write-version $schema_name $i
 done
