@@ -33,8 +33,14 @@ from=$(($database_version+1))
 to=$source_version
 
 for i in $(seq $from $to); do
-	echo "Applying update #$i ($(readlink -f $source_path/$i*.sql))..."
-	cat $source_path/$i*.sql | source connector-branch query-schema $schema_name
+	path=$(readlink -f $(find $source_path | grep -E "^$source_path/($i\.sql|$i\_.*\.sql)\$"))
+
+	if [ ! -f $path ]; then
+		source error "schemer: Could not find \"$path\"; aborting."
+	fi
+
+	echo "Applying update #$i ($path)..."
+	cat $path | source connector-branch query-schema $schema_name
 	source connector-branch write-version $schema_name $i
 done
 
