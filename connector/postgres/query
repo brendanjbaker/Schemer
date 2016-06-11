@@ -9,4 +9,3 @@ psql \
 	--set "ON_ERROR_STOP=on" \
 	--single-transaction \
 	--username $username
-
