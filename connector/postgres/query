@@ -7,5 +7,6 @@ psql \
 	--pset "tuples_only=on" \
 	--quiet \
 	--set "ON_ERROR_STOP=on" \
+	--single-transaction \
 	--username $username
 
